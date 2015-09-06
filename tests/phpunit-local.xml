@@ -1,0 +1,13 @@
+<phpunit bootstrap="testApp.php" backupGlobals="false">
+
+    <testsuite name="Unit Tests">
+        <directory>.</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php"></directory>
+        </whitelist>
+    </filter>
+
+</phpunit>
