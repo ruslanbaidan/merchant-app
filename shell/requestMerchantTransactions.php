@@ -16,7 +16,6 @@ if (empty($argv[1])) {
 
 $merchantId = (int) $argv[1];
 
-$merchant = new \App\Models\Merchant();
-if ($merchant->findPk($merchantId)) {
+if ($merchant = (new \App\Models\Merchant())->findPk($merchantId)) {
 	require APPLICATION_PATH . '/scripts/report.php';
 }

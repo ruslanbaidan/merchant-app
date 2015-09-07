@@ -11,7 +11,7 @@ namespace Library\Model;
 abstract class BaseDbModel
 {
 	/**
-	 * Need to be specified in parent classes.
+	 * Needs to be specified in parent classes.
 	 *
 	 * @var string
 	 */
@@ -26,6 +26,8 @@ abstract class BaseDbModel
 
 	/**
 	 * The table primary key name.
+	 *
+	 * Should be overridden in case of difference.
 	 *
 	 * @var array
 	 */
@@ -98,9 +100,11 @@ abstract class BaseDbModel
 	/**
 	 * Fetches and sets the model data by primary key.
 	 *
+	 * Returns a particular model object if exists or false.
+	 *
 	 * @param mixed $key Primary key.
 	 *
-	 * @return boolean
+	 * @return boolean|mixed
 	 */
 	public function findPk($key)
 	{
@@ -122,7 +126,7 @@ abstract class BaseDbModel
 
 			$this->_isNew = false;
 
-			return true;
+			return $this;
 		}
 
 		return false;
@@ -146,6 +150,8 @@ abstract class BaseDbModel
 		if (!empty($this->relations[$relationName]) && !$forceLoad) {
 			return $this->relations[$relationName];
 		}
+
+		$this->relations[$relationName] = [];
 
 		$relationModelName = $this->relationsMap[$relationName]['relationModel'];
 		$fields = $relationModelName::getFieldsList();
@@ -208,6 +214,22 @@ abstract class BaseDbModel
 	public function setIsNew($isNew)
 	{
 		$this->_isNew = $isNew;
+	}
+
+	/**
+	 * Appends a relation to the current object.
+	 *
+	 * @param string $relationName   Relation name.
+	 * @param mixed  $relationObject Relation object.
+	 *
+	 * @return void
+	 */
+	public function addRelation($relationName, $relationObject)
+	{
+		if (!empty($this->relationsMap[$relationName])
+			&& get_class($relationObject) == $this->relationsMap[$relationName]['relationModel']) {
+			$this->relations[$relationName][] = $relationObject;
+		}
 	}
 
 	/**

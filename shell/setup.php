@@ -21,26 +21,11 @@ $db = Database::getConnection();
 /*
  * Create the database tables.
  */
-$sql = 'DROP TABLE IF EXISTS merchants';
-$db->exec($sql);
-
-$sql = 'DROP TABLE IF EXISTS transactions';
-$db->exec($sql);
-
-$sql = 'CREATE TABLE merchants (
- 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		name TEXT
-)';
-$db->exec($sql);
-
-$sql = 'CREATE TABLE transactions (
- 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		merchant_id INTEGER,
-		date TEXT,
-		amount TEXT,
-		currency TEXT
-)';
-$db->exec($sql);
+$schemaPath = APPLICATION_PATH . '/../data/' . $config->db->schema;
+if (!file_exists($schemaPath)) {
+	throw new Exception('The schema file "' . $config->db->schema . '" does not exist.');
+}
+$db->exec(file_get_contents($schemaPath));
 
 /*
  * Parse data from CSV and insert into the database.
@@ -73,9 +58,9 @@ foreach ($testCsvData as $testCsvDataRow) {
 			->save();
 	}
 
-	$currency = 'USD';
-	if (!isset(TransactionTable::$currencySymbolMap[$matches[1]])
-		|| !($amount = $currencyConverter->convert(TransactionTable::$currencySymbolMap[$matches[1]], $currency, $matches[2]))
+	$currency = CurrencyConverter::DEFAULT_SYSTEM_CURRENCY;
+	if (!isset(CurrencyConverter::$currencySymbolMap[$matches[1]])
+		|| !($amount = $currencyConverter->convert(CurrencyConverter::$currencySymbolMap[$matches[1]], $currency, $matches[2]))
 	) {
 		// TODO: Notify about unsupported / unconverted currency.
 		$currency = $matches[1];

@@ -8,10 +8,16 @@
  */
 class CurrencyWebservice
 {
+	/** Currency codes. */
 	const CURRENCY_CODE_GBP = 'GBP';
 	const CURRENCY_CODE_USD = 'USD';
 	const CURRENCY_CODE_EUR = 'EUR';
 
+	/**
+	 * Service supported currencies.
+	 *
+	 * @var array
+	 */
 	protected $_supportedCurrencyCodes = [
 		self::CURRENCY_CODE_GBP,
 		self::CURRENCY_CODE_USD,

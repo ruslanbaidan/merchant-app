@@ -1,4 +1,7 @@
 <?php
+/**
+ * Simple report to display the merchant related transaction.
+ */
 
 echo 'Transactions for merchant ID: ' . $merchant->getId() . "\n";
 
