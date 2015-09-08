@@ -8,7 +8,7 @@
 
 namespace Library\Model;
 
-abstract class BaseDbModel
+abstract class BaseDbModel implements DbModelInterface
 {
 	/**
 	 * Needs to be specified in parent classes.
@@ -72,7 +72,7 @@ abstract class BaseDbModel
 				foreach ($relation as $particularRelation) {
 					$particularRelation->save();
 				}
-			} else if (!empty($relation)) {
+			} else if ($relation instanceof DbModelInterface) {
 				$relation->save();
 			}
 		}
