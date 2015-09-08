@@ -79,7 +79,7 @@ class Merchant extends BaseDbModel
 	 */
 	public function setId($id)
 	{
-		$this->id = $id;
+		$this->id = (int) $id;
 
 		return $this;
 	}
@@ -142,7 +142,7 @@ class Merchant extends BaseDbModel
 				continue;
 			}
 
-			$transaction->setMerchant($this);
+			$this->addTransaction($transaction);
         }
 	}
 

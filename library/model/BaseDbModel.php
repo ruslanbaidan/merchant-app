@@ -228,6 +228,7 @@ abstract class BaseDbModel
 	{
 		if (!empty($this->relationsMap[$relationName])
 			&& get_class($relationObject) == $this->relationsMap[$relationName]['relationModel']) {
+
 			$this->relations[$relationName][] = $relationObject;
 		}
 	}

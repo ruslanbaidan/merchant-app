@@ -18,4 +18,6 @@ $merchantId = (int) $argv[1];
 
 if ($merchant = (new \App\Models\Merchant())->findPk($merchantId)) {
 	require APPLICATION_PATH . '/scripts/report.php';
+} else {
+	echo 'The merchant ID ' . $merchantId . ' is not exists.' . "\n";
 }
