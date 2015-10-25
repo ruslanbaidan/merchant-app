@@ -2,7 +2,7 @@
 /**
  * CLI main application file.
  *
- * @package Test\Shell
+ * @package MerchantApp\Shell
  * @author  Ruslan Baydan <baydanr@gmail.com>
  */
 
@@ -19,4 +19,4 @@ require realpath(APPLICATION_PATH . '/../vendor/autoload.php');
 define('APPLICATION_ENV', 'test');
 
 // Run the application.
-\Library\TestApplication::run(APPLICATION_ENV, 'app.ini');
+\Library\MerchantApplication::run(APPLICATION_ENV, 'app.ini');

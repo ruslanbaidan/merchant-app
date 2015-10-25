@@ -3,7 +3,7 @@
 /**
  * Processes shell requests for merchant related transactions.
  *
- * @package Test\Shell
+ * @package MerchantApp\Shell
  * @author  Ruslan Baydan <baydanr@gmail.com>
  */
 

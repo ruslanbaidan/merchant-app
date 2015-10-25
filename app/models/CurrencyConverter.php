@@ -3,7 +3,7 @@
 /**
  * Converts amount to specified currency. Uses CurrencyWebservice.
  *
- * @package Test\App\Models
+ * @package MerchantApp\App\Models
  * @author  Ruslan Baydan <baydanr@gmail.com>
  */
 

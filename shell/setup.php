@@ -3,7 +3,7 @@
 /**
  * This file is used to setup the SQLite database.
  *
- * @package Test\Shell
+ * @package MerchantApp\Shell
  * @author  Ruslan Baydan <baydanr@gmail.com>
  */
 
@@ -11,11 +11,11 @@ include 'shellApp.php';
 
 use \App\Models\TransactionTable;
 use \Library\Model\Database;
-use \Library\TestApplication;
+use \Library\MerchantApplication;
 use \App\Models\Merchant;
 use \App\Models\CurrencyConverter;
 
-$config = TestApplication::app()->getConfig();
+$config = MerchantApplication::app()->getConfig();
 $db = Database::getConnection();
 
 /*
@@ -67,12 +67,9 @@ foreach ($testCsvData as $testCsvDataRow) {
 		$amount = $matches[2];
 	}
 
-	$merchant->addTransaction(
-		(new TransactionTable())
-			->setDate(str_replace('"', '', $testDataRow[1]))
-			->setAmount($amount)
-			->setCurrency($currency)
-	);
-
-	$merchant->save();
+	(new TransactionTable($merchant))
+		->setDate(str_replace('"', '', $testDataRow[1]))
+		->setAmount($amount)
+		->setCurrency($currency)
+		->save();
 }

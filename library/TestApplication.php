@@ -2,18 +2,18 @@
 /**
  * The test application basic class.
  *
- * @package Test\Library
+ * @package MerchantApp\Library
  * @author  Ruslan Baydan <baydanr@gmail.com>
  */
 
 namespace Library;
 
-class TestApplication
+class MerchantApplication
 {
 	/**
 	 * Application object.
 	 *
-	 * @var TestApplication
+	 * @var MerchantApplication
 	 */
 	private static $_application;
 
@@ -59,7 +59,7 @@ class TestApplication
 	 *
 	 * @throws Exception
 	 *
-	 * @return TestApplication
+	 * @return MerchantApplication
 	 */
 	public static function run($environment, $configName)
 	{
@@ -73,7 +73,7 @@ class TestApplication
 	/**
 	 * Returns the application object.
 	 *
-	 * @return TestApplication
+	 * @return MerchantApplication
 	 */
 	public static function app()
 	{
@@ -95,16 +95,16 @@ class TestApplication
 	 *
 	 * @param $configName
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 *
 	 * @return void
 	 */
 	private function _loadConfig($configName)
 	{
-		$configPath = APPLICATION_PATH . '/config/' . APPLICATION_ENV . '.' . $configName;
+		$configPath = APPLICATION_PATH . '/config/' . $this->_environment . '.' . $configName;
 
 		if (!file_exists($configPath)) {
-			throw new Exception('Please create a config file "' . $configPath . '".');
+			throw new \Exception('Please create a config file "' . $configPath . '".');
 		}
 
 		$this->_config = new Config\TestConfig(parse_ini_file($configPath));

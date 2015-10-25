@@ -2,7 +2,7 @@
 /**
  * The test application basic class.
  *
- * @package Test\Library
+ * @package MerchantApp\Library
  * @author  Ruslan Baydan <baydanr@gmail.com>
  */
 

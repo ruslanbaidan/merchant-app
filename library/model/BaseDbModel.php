@@ -2,11 +2,13 @@
 /**
  * Database model basic class.
  *
- * @package Test\Library\Model
+ * @package MerchantApp\Library\Model
  * @author  Ruslan Baydan <baydanr@gmail.com>
  */
 
 namespace Library\Model;
+
+use Library\Model\Interfaces\DbModelInterface;
 
 abstract class BaseDbModel implements DbModelInterface
 {
@@ -171,12 +173,10 @@ abstract class BaseDbModel implements DbModelInterface
 
 		while ($data = $result->fetchArray(SQLITE3_ASSOC)) {
 
-			$relationObject = new $relationModelName();
+			$relationObject = new $relationModelName($this);
 			foreach ($fields as $fieldDbName => $fieldName) {
 				$relationObject->$fieldName = $data[$fieldDbName];
 			}
-
-			$this->relations[$relationName][] = $relationObject;
 
 			$relationObject->setIsNew(false);
 		}

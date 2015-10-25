@@ -3,7 +3,7 @@
 /**
  * Dummy web service returning random exchange rates.
  *
- * @package Test\App\Models
+ * @package MerchantApp\App\Models
  * @author  Ruslan Baydan <baydanr@gmail.com>
  */
 class CurrencyWebservice

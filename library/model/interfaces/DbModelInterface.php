@@ -1,13 +1,12 @@
 <?php
-
 /**
  * Base database model interface.
  *
- * @package Test\Library\Interface
+ * @package MerchantApp\Library\Model\Interfaces
  * @author  Ruslan Baydan <baydanr@gmail.com>
  */
 
-namespace Library\Model;
+namespace Library\Model\Interfaces;
 
 interface DbModelInterface
 {

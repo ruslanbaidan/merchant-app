@@ -3,7 +3,7 @@
  * Tests for the merchant model.
  */
 
-use \Library\TestApplication;
+use \Library\MerchantApplication;
 use \Library\Model\Database;
 use \App\Models\Merchant;
 use \App\Models\TransactionTable;
@@ -22,14 +22,14 @@ class MerchantTest extends PHPUnit_Framework_TestCase
 		// Create the test DB.
 		self::$dbConnection = Database::getConnection();
 
-		$schemaPath = APPLICATION_PATH . '/../data/' . TestApplication::app()->getConfig()->db->schema;
+		$schemaPath = APPLICATION_PATH . '/../data/' . MerchantApplication::app()->getConfig()->db->schema;
 		self::$dbConnection->exec(file_get_contents($schemaPath));
 	}
 
 	public static function tearDownAfterClass()
 	{
 		// Remove the test DB.
-		$config = TestApplication::app()->getConfig();
+		$config = MerchantApplication::app()->getConfig();
 		$dbFileName = APPLICATION_PATH . '/../' . $config->db->path . '/' . $config->db->name;
 		if (file_exists($dbFileName)) {
 			unlink($dbFileName);
