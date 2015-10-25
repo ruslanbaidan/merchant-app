@@ -53,9 +53,9 @@ class MerchantTest extends PHPUnit_Framework_TestCase
 		return $merchant;
 	}
 
-	public function _getNewTransaction()
+	public function _getNewTransaction(Merchant $merchant)
 	{
-		return (new TransactionTable())
+		return (new TransactionTable($merchant))
 			->setDate('2015-09-07')
 			->setCurrency('USD')
 			->setAmount('10.55');
@@ -81,18 +81,18 @@ class MerchantTest extends PHPUnit_Framework_TestCase
 	{
 		$merchant = $this->_createTestMerchant();
 
-		$transaction = $this->_getNewTransaction();
+		$transaction = $this->_getNewTransaction($merchant);
 
 		$merchant->addTransaction($transaction);
 
-		$this->assertCount(1, $merchant->getTransactions());
+		$this->assertCount(2, $merchant->getTransactions($merchant));
 
 		$this->assertEquals($transaction->getMerchantId(), $merchant->getId());
 
-		$transaction = $this->_getNewTransaction();
+		$transaction = $this->_getNewTransaction($merchant);
 		$merchant->addTransaction($transaction);
 
-		$this->assertCount(2, $merchant->getTransactions());
+		$this->assertCount(4, $merchant->getTransactions());
 
 		$this->assertEquals($transaction->getMerchantId(), $merchant->getId());
 	}
@@ -101,13 +101,13 @@ class MerchantTest extends PHPUnit_Framework_TestCase
 	{
 		$merchant = $this->_createTestMerchant();
 
-		$transaction = $this->_getNewTransaction();
+		$transaction = $this->_getNewTransaction($merchant);
 
 		$transaction->setMerchant($merchant);
 
 		$this->assertEquals($transaction->getMerchantId(), $merchant->getId());
 
-		$this->assertCount(1, $merchant->getTransactions());
+		$this->assertCount(2, $merchant->getTransactions());
 
 		$this->assertEquals($transaction->getMerchantId(), $merchant->getId());
 	}
@@ -116,11 +116,11 @@ class MerchantTest extends PHPUnit_Framework_TestCase
 	{
 		$merchant = $this->_createTestMerchant();
 
-		$transaction = $this->_getNewTransaction();
+		$transaction = $this->_getNewTransaction($merchant);
 
 		$transaction->setMerchant($merchant);
 
-		$transaction = $this->_getNewTransaction()
+		$transaction = $this->_getNewTransaction($merchant)
 			->setCurrency('EUR')
 			->setDate('2015-09-05')
 			->setAmount(5.55);
@@ -130,7 +130,7 @@ class MerchantTest extends PHPUnit_Framework_TestCase
 		$merchant->save();
 
 		foreach ($merchant->getTransactions() as $transaction) {
-			$foundTransaction = (new TransactionTable())->findPk($transaction->getId());
+			$foundTransaction = (new TransactionTable($merchant))->findPk($transaction->getId());
 			$this->assertInstanceOf('\App\Models\TransactionTable', $foundTransaction);
 			$this->assertEquals($transaction->getId(), $foundTransaction->getId());
 			$this->assertEquals($transaction->getCurrency(), $foundTransaction->getCurrency());
