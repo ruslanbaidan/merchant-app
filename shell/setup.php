@@ -67,9 +67,10 @@ foreach ($testCsvData as $testCsvDataRow) {
 		$amount = $matches[2];
 	}
 
-	(new TransactionTable($merchant))
+	(new TransactionTable())
 		->setDate(str_replace('"', '', $testDataRow[1]))
 		->setAmount($amount)
 		->setCurrency($currency)
+		->setMerchant($merchant)
 		->save();
 }

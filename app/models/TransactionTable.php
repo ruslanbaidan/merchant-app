@@ -89,16 +89,6 @@ class TransactionTable extends BaseDbModel
 	private $_merchant;
 
 	/**
-	 * Constructs of the class object.
-	 *
-	 * @param Merchant $merchant
-	 */
-	public function __construct(Merchant $merchant)
-	{
-		$this->setMerchant($merchant);
-	}
-
-	/**
 	 * Returns the ID.
 	 *
 	 * @return integer

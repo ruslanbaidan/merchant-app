@@ -173,10 +173,12 @@ abstract class BaseDbModel implements DbModelInterface
 
 		while ($data = $result->fetchArray(SQLITE3_ASSOC)) {
 
-			$relationObject = new $relationModelName($this);
+			$relationObject = new $relationModelName();
 			foreach ($fields as $fieldDbName => $fieldName) {
 				$relationObject->$fieldName = $data[$fieldDbName];
 			}
+
+			$this->relations[$relationName][] = $relationObject;
 
 			$relationObject->setIsNew(false);
 		}
