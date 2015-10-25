@@ -9,7 +9,7 @@
 
 include 'shellApp.php';
 
-use \App\Models\TransactionTable;
+use \App\Models\Transaction;
 use \Library\Model\Database;
 use \Library\MerchantApplication;
 use \App\Models\Merchant;
@@ -67,7 +67,7 @@ foreach ($testCsvData as $testCsvDataRow) {
 		$amount = $matches[2];
 	}
 
-	(new TransactionTable())
+	(new Transaction())
 		->setDate(str_replace('"', '', $testDataRow[1]))
 		->setAmount($amount)
 		->setCurrency($currency)

@@ -10,7 +10,7 @@ namespace App\Models;
 
 use Library\Model\BaseDbModel;
 
-class TransactionTable extends BaseDbModel
+class Transaction extends BaseDbModel
 {
 	/**
 	 * The table name.
@@ -103,7 +103,7 @@ class TransactionTable extends BaseDbModel
 	 *
 	 * @param integer $id ID.
 	 *
-	 * @return TransactionTable
+	 * @return Transaction
 	 */
 	public function setId($id)
 	{
@@ -127,7 +127,7 @@ class TransactionTable extends BaseDbModel
 	 *
 	 * @param integer $merchantId Merchant ID.
 	 *
-	 * @return TransactionTable
+	 * @return Transaction
 	 */
 	public function setMerchantId($merchantId)
 	{
@@ -151,7 +151,7 @@ class TransactionTable extends BaseDbModel
 	 *
 	 * @param string $date Date.
 	 *
-	 * @return TransactionTable
+	 * @return Transaction
 	 */
 	public function setDate($date)
 	{
@@ -175,7 +175,7 @@ class TransactionTable extends BaseDbModel
 	 *
 	 * @param string|double $amount Amount.
 	 *
-	 * @return TransactionTable
+	 * @return Transaction
 	 */
 	public function setAmount($amount)
 	{
@@ -199,7 +199,7 @@ class TransactionTable extends BaseDbModel
 	 *
 	 * @param string $currency Currency.
 	 *
-	 * @return TransactionTable
+	 * @return Transaction
 	 */
 	public function setCurrency($currency)
 	{
@@ -213,7 +213,7 @@ class TransactionTable extends BaseDbModel
 	 *
 	 * @param Merchant $merchant Merchant object.
 	 *
-	 * @return TransactionTable
+	 * @return Transaction
 	 */
 	public function setMerchant(Merchant $merchant)
 	{

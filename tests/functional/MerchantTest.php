@@ -6,7 +6,7 @@
 use \Library\MerchantApplication;
 use \Library\Model\Database;
 use \App\Models\Merchant;
-use \App\Models\TransactionTable;
+use \App\Models\Transaction;
 
 class MerchantTest extends PHPUnit_Framework_TestCase
 {
@@ -55,7 +55,7 @@ class MerchantTest extends PHPUnit_Framework_TestCase
 
 	public function _getNewTransaction()
 	{
-		return (new TransactionTable())
+		return (new Transaction())
 			->setDate('2015-09-07')
 			->setCurrency('USD')
 			->setAmount('10.55');
@@ -130,8 +130,8 @@ class MerchantTest extends PHPUnit_Framework_TestCase
 		$merchant->save();
 
 		foreach ($merchant->getTransactions() as $transaction) {
-			$foundTransaction = (new TransactionTable())->findPk($transaction->getId());
-			$this->assertInstanceOf('\App\Models\TransactionTable', $foundTransaction);
+			$foundTransaction = (new Transaction())->findPk($transaction->getId());
+			$this->assertInstanceOf('\App\Models\Transaction', $foundTransaction);
 			$this->assertEquals($transaction->getId(), $foundTransaction->getId());
 			$this->assertEquals($transaction->getCurrency(), $foundTransaction->getCurrency());
 			$this->assertEquals($transaction->getDate(), $foundTransaction->getDate());

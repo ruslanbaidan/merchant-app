@@ -40,7 +40,7 @@ class Merchant extends BaseDbModel
 	protected $relationsMap = [
 		'transactions' => [
 			'relationTable' => 'transactions',
-			'relationModel' => 'App\Models\TransactionTable',
+			'relationModel' => 'App\Models\Transaction',
 			'relationKey'   => 'id',
 			'foreignKey'    => 'merchant_id',
 		],
@@ -111,11 +111,11 @@ class Merchant extends BaseDbModel
 	/**
 	 * Adds a related transaction.
 	 *
-	 * @param TransactionTable $transaction Transaction.
+	 * @param Transaction $transaction Transaction.
 	 *
 	 * @return void
 	 */
-	public function addTransaction(TransactionTable $transaction)
+	public function addTransaction(Transaction $transaction)
 	{
 		$transaction->setMerchant($this);
 	}
@@ -138,7 +138,7 @@ class Merchant extends BaseDbModel
 		}
 
 		foreach ($transactions as $transaction) {
-			if (!$transactions instanceof TransactionTable) {
+			if (!$transactions instanceof Transaction) {
 				continue;
 			}
 
